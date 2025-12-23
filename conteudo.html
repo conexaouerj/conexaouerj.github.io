@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo - Projeto Conexão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .accordion-content { transition: max-height 0.5s ease-in-out; max-height: 0; overflow: hidden; }
+        .accordion-content.open { max-height: 4000px; }
+        .rotate-180 { transform: rotate(180deg); }
+        #mobile-menu { display: none; }
+        #mobile-menu.open { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg shadow-blue-500/5 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/logo.png" alt="Logo Projeto Conexão" class="w-8 h-8 object-contain">
+                </a>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Início</a>
+                    <a href="conteudo.html" class="px-3 py-2 rounded-md text-blue-600 bg-blue-50 transition-colors">Conteúdo</a>
+                    <a href="eventos.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Eventos</a>
+                    <a href="registros.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Registros</a>
+                    <a href="contato.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Contato</a>
+                </nav>
+
+                <button id="menu-btn" class="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            
+            <div id="mobile-menu" class="md:hidden py-4 border-t border-gray-200">
+                <nav class="flex flex-col space-y-2">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">Início</a>
+                    <a href="conteudo.html" class="px-3 py-2 rounded-md text-blue-600 bg-blue-50">Conteúdo</a>
+                    <a href="eventos.html" class="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">Eventos</a>
+                    <a href="registros.html" class="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">Registros</a>
+                    <a href="contato.html" class="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 min-h-screen relative overflow-hidden">
+        
+        <!-- Decorative backgrounds -->
+        <div class="absolute top-20 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-20 left-0 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute top-1/3 left-1/3 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 mb-4 shadow-lg shadow-blue-500/30">
+                    <i data-lucide="book-open" class="text-white w-8 h-8"></i>
+                </div>
+                <h1 class="text-4xl text-blue-900 font-bold mb-2">Conteúdo Didático</h1>
+                <p class="text-gray-600">Material organizado por área de conhecimento</p>
+            </div>
+
+            <div id="content-container" class="space-y-12"></div>
+
+        </div>
+    </main>
+
+    <script>
+        // 1. Menu Mobile Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // 2. Helper para criar estrutura vazia
+        const createContent = () => ({ teoria: [], experimentos: [], exercicios: [] });
+
+        // 3. Dados Completos
+        const theoreticalContent = [
+            {
+                sectionTitle: "QUÍMICA GERAL E INORGÂNICA",
+                chapters: [
+                    { 
+                    title: "Aspectos Macroscópicos da Matéria", 
+                    children: [ 
+                        { title: "Matéria e Energia", content: { teoria: [ { title: "Conceitos introdutórios", type: 'youtube', videoId: 'yAsU88OllAU' } ], experimentos: [], exercicios: [] } },
+                        { title: "Grandezas", content: { teoria: [ { title: "Grandezas", type: 'youtube', videoId: 'adNOSEUOvZ0' } ], experimentos: [], exercicios: [] } },
+                        { title: "Estados de Agregação", content: { teoria: [ { title: "Estados de Agregação", type: 'youtube', videoId: '8SOMdxX8CYk' } ], experimentos: [{ title: "Ponto de Congelamento do Ciclohexano", type: 'youtube', videoId: '8xft52ub-fM' }], exercicios: [] } },
+                        { title: "Propriedades da Matéria", content: createContent() },
+                        { title: "Substâncias e Misturas: Fases, Componentes e Classificação", content: createContent() },
+                        { title: "Aquecimento e resfriamento de substâncias", content: createContent() },
+                        { title: "Aquecimento e resfriamento de misturas", content: createContent() },
+                        { title: "Métodos de separação de sistemas homogêneos", content: createContent() },
+                        { title: "Métodos de separação de sistemas heterogêneos", content: createContent() },
+                    ],
+                    },
+                    { 
+                    title: "Atomística", 
+                    children: [
+                        { title: "A hipótese atômica e o modelo de Dalton", content: createContent() },
+                        { title: "O modelo de Thomson e a descoberta do elétron", content: createContent() },
+                        { title: "O modelo de Rutherford", content: createContent() },
+                        { title: "O modelo de Bohr", content: createContent() },
+                        { title: "O modelo de Sommerfeld", content: createContent() },
+                        { title: "Constituição dos átomos e íons", content: createContent() },
+                        { title: "Semelhanças atômicas", content: createContent() },
+                        { title: "Configuração eletrônica em níveis e subníveis", content: createContent() },
+                        { title: "Configurações eletrônicas especiais", content: createContent() },
+                    ],
+                    },
+                    { 
+                    title: "Os elementos químicos", 
+                    children: [
+                        { title: "A evolução das classificações periódicas", content: createContent() },
+                        { title: "Períodos e grupos", content: createContent() },
+                        { title: "Blocos da tabela periódica", content: createContent() },
+                        { title: "Classificação quanto à condutividade elétrica", content: createContent() },
+                        { title: "Propriedades periódicas: raio atômico", content: createContent() },
+                        { title: "Propriedades periódicas: energia de ionização", content: createContent() },
+                        { title: "Propriedades periódicas: afinidade eletrônica", content: createContent() },
+                        { title: "Propriedades periódicas: eletronegatividade", content: createContent() },
+                        { title: "Propriedades periódicas: eletropositividade", content: createContent() },
+                        { title: "Propriedades periódicas: outras", content: createContent() },
+                    ],
+                    },
+                    { 
+                    title: "Ligação química", 
+                    children: [
+                        { title: "A regra do octeto", content: createContent() },
+                        { title: "Ligação iônica", content: createContent() },
+                        { title: "Ligação covalente", content: createContent() },
+                        { title: "Montagem de fórmulas estruturais simples", content: createContent() },
+                        { title: "Ligação metálica", content: createContent() },
+                        { title: "Condutividade elétrica de diferentes sistemas", content: createContent() },
+                        { title: "Ligação Covalente Coordenada x Expansão do Octeto", content: createContent() },
+                    ]
+                    },
+                    { 
+                    title: "Geometria, polaridade e interações", 
+                    children: [
+                        { title: "Teoria da Repulsão dos Pares Eletrônicos da Camada de Valência", content: createContent() },
+                        { title: "Geometrias possíveis para os pares eletrônicos", content: createContent() },
+                        { title: "Geometrias de moléculas", content: createContent() },
+                        { title: "Polaridade de ligações químicas", content: createContent() },
+                        { title: "Polaridade de moléculas", content: createContent() },
+                        { title: "Forças intermoleculares", content: createContent() },
+                        { title: "Conexão com as mudanças de estado de agregação", content: createContent() },
+                        { title: "Conexão com a solubilidade", content: createContent() },
+                    ]
+                    },
+                    { 
+                    title: "Oxirredução", 
+                    children: [
+                        { title: "Número de oxidação", content: createContent() },
+                        { title: "Elementos com Nox fixo", content: createContent() },
+                        { title: "Determinação de Nox", content: createContent() },
+                        { title: "Oxidação e redução", content: createContent() },
+                        { title: "Agentes oxidantes e redutores", content: createContent() },
+                    ],
+                    },
+                    { 
+                    title: "Funções Inorgânicas", 
+                    children: [
+                        { 
+                        title: "Ácidos", 
+                        children: [
+                            { title: "Condutividade de compostos iônicos (dissociação)", content: createContent() },
+                            { title: "Ácidos de Arrhenius e equações de ionização", content: createContent() },
+                            { title: "Classificação de ácidos", content: createContent() },
+                            { title: "Nomenclatura de ácidos", content: createContent() },
+                            { title: "Formulação de ácidos", content: createContent() },
+                            { title: "Força x poder de corrosão", content: createContent() },
+                            { title: "Propriedades e aplicações", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Bases", 
+                        children: [
+                            { title: "Bases de Arrhenius e equações de dissociação", content: createContent() },
+                            { title: "Classificação das bases", content: createContent() },
+                            { title: "O hidróxido de amônio", content: createContent() },
+                            { title: "Nomenclatura de bases", content: createContent() },
+                            { title: "Propriedades e aplicações", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Indicadores ácido-base e pH", 
+                        children: [
+                            { title: "Escala de pH e ação de indicadores", content: createContent() },
+                            { title: "Indicadores comerciais", content: createContent() },
+                            { title: "Indicadores naturais", content: createContent() },
+                            { title: "Reações de neutralização total e parcial", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Sais", 
+                        children: [
+                            { title: "Conceito de sal", content: createContent() },
+                            { title: "Classificação de sais", content: createContent() },
+                            { title: "Nomenclatura de sais", content: createContent() },
+                            { title: "Formulação de sais", content: createContent() },
+                            { title: "Propriedades e aplicações", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Óxidos", 
+                        children: [
+                            { title: "Conceito de óxido", content: createContent() },
+                            { title: "Classificação de óxidos", content: createContent() },
+                            { title: "Nomenclatura de óxidos", content: createContent() },
+                            { title: "Formulação de óxidos", content: createContent() },
+                            { title: "Propriedades e aplicações", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Peróxidos e superóxidos", 
+                        children: [
+                            { title: "Conceitos de peróxidos e superóxidos", content: createContent() },
+                            { title: "Nomenclatura de peróxidos e superóxidos", content: createContent() },
+                            { title: "Formulação de peróxidos e superóxidos", content: createContent() },
+                            { title: "Propriedades e aplicações", content: createContent() },
+                        ]
+                        },
+                        { 
+                        title: "Hidretos", 
+                        children: [
+                            { title: "Conceito de hidreto", content: createContent() },
+                            { title: "Classificação de hidretos", content: createContent() },
+                            { title: "Nomenclatura de hidretos", content:createContent() },
+                            { title: "Formulação de hidretos", content: createContent() },
+                        ]
+                        },
+                    ],
+                    },
+                    { 
+                    title: "Reações Inorgânicas", 
+                    children: [
+                        { title: "Representação de uma reação", content: createContent() },
+                        { title: "Reações de adição ou síntese", content: createContent() },
+                        { title: "Reações de decomposição ou análise", content: createContent() },
+                        { title: "Reações de simples troca, deslocamento ou substituição", content: createContent() },
+                        { title: "Reações de dupla troca ou permutação", content: createContent() },
+                    ]
+                    },
+                ],
+            },
+            { 
+                sectionTitle: "FÍSICO-QUÍMICA", 
+                chapters: [
+                    { title: "Soluções", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
+                    { title: "Termoquímica", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
+                ]
+            },
+            { 
+                sectionTitle: "QUÍMICA ORGÂNICA", 
+                chapters: [
+                    { title: "Introdução à Química Orgânica", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
+                    { title: "Funções Orgânicas", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
+                ]
+            },
+        ];
+
+        // 4. Funções de Renderização
+        const container = document.getElementById('content-container');
+
+        // Renderiza um item do YouTube
+        function renderYoutubeItem(item) {
+            return `
+            <div class="bg-gradient-to-br from-white to-blue-50/30 rounded-xl border border-blue-200/50 overflow-hidden hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all mb-3">
+                <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
+                    <div class="flex items-center gap-3 flex-1">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-md shadow-red-500/30">
+                            <i data-lucide="play" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-gray-700">${item.title}</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 icon-chevron"></i>
+                </button>
+                <div class="accordion-content bg-gray-50 border-t border-gray-200">
+                    <div class="p-4">
+                        <div class="aspect-video rounded-lg overflow-hidden shadow-md relative bg-black">
+                             <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // Renderiza um item de Artigo
+        function renderArtigoItem(item) {
+            return `
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 bg-gradient-to-br from-white to-teal-50/30 rounded-xl border border-teal-200/50 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/10 transition-all group mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-teal-500 flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-500/30">
+                    <i data-lucide="file-text" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="text-gray-700">${item.title}</span>
+            </a>
+            `;
+        }
+
+        // Renderiza as Abas (Teoria, Experimentos, Exercícios)
+        function renderTabs(content) {
+            const tabs = [
+                { id: 'teoria', label: 'Teoria', data: content.teoria },
+                { id: 'experimentos', label: 'Experimentos', data: content.experimentos },
+                { id: 'exercicios', label: 'Exercícios', data: content.exercicios },
+            ];
+            
+            const hasContent = tabs.some(t => t.data && t.data.length > 0);
+
+            if (!hasContent) {
+                return `
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="book-open" class="w-6 h-6 text-gray-400"></i>
+                    </div>
+                    <p class="text-gray-500 text-sm">Nenhum conteúdo disponível nesta seção ainda.</p>
+                </div>`;
+            }
+
+            let tabsNavHtml = '';
+            let tabsContentHtml = '';
+
+            tabs.forEach((tab, idx) => {
+                const isActive = idx === 0; // Primeira aba ativa por padrão
+                
+                // Botão da aba
+                tabsNavHtml += `
+                    <button onclick="switchTab(this, '${tab.id}')" class="pb-3 px-1 border-b-2 transition-all ${isActive ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}">
+                        ${tab.label}
+                    </button>
+                `;
+
+                // Conteúdo da aba
+                let itemsHtml = '';
+                if (tab.data.length > 0) {
+                    itemsHtml = tab.data.map(item => {
+                        if (item.type === 'youtube') return renderYoutubeItem(item);
+                        if (item.type === 'artigo') return renderArtigoItem(item);
+                        return '';
+                    }).join('');
+                } else {
+                    itemsHtml = `<p class="text-gray-400 text-sm italic py-4">Sem itens nesta categoria.</p>`;
+                }
+
+                tabsContentHtml += `
+                    <div data-tab="${tab.id}" class="${isActive ? 'block' : 'hidden'}">
+                        ${itemsHtml}
+                    </div>
+                `;
+            });
+
+            return `
+                <div class="tabs-container mt-4">
+                    <div class="border-b-2 border-gray-100 mb-4">
+                        <nav class="flex gap-6" aria-label="Tabs">
+                            ${tabsNavHtml}
+                        </nav>
+                    </div>
+                    <div class="tabs-content-area">
+                        ${tabsContentHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Renderiza um Nó Recursivo (Capítulo ou Subcapítulo)
+        function renderNode(node, level) {
+            const isLeaf = !!node.content;
+            const paddingLeft = 16 + (level * 24);
+            const isTopLevel = level === 0;
+
+            // Conteúdo interno (Filhos ou Abas)
+            let innerContent = '';
+            if (isLeaf) {
+                innerContent = `<div class="px-4 pb-6">${renderTabs(node.content)}</div>`;
+            } else if (node.children) {
+                innerContent = node.children.map(child => renderNode(child, level + 1)).join('');
+            }
+
+            // Estilos condicionais
+            const bgClass = isTopLevel ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50';
+            const textClass = isTopLevel ? 'text-gray-800 font-medium' : 'text-gray-700';
+            const iconHtml = !isTopLevel ? `
+                <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center flex-shrink-0 mr-3">
+                    <i data-lucide="book-open" class="w-4 h-4 text-gray-600"></i>
+                </div>` : '';
+
+            return `
+            <div class="border-b border-gray-200 last:border-0">
+                <button onclick="toggleAccordion(this)" class="w-full flex items-center pr-4 text-left transition-all ${bgClass}" style="padding-left: ${paddingLeft}px; padding-top: 12px; padding-bottom: 12px;">
+                    ${iconHtml}
+                    <span class="flex-grow ${textClass}">${node.title}</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 icon-chevron flex-shrink-0"></i>
+                </button>
+                <div class="accordion-content ${isTopLevel ? 'bg-white' : 'bg-gray-50/50'}">
+                    ${innerContent}
+                </div>
+            </div>
+            `;
+        }
+
+        // 5. Loop Principal de Renderização
+        theoreticalContent.forEach((section, idx) => {
+            const sectionHtml = `
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent"></div>
+                        <h2 class="text-2xl text-blue-900 tracking-wide px-4 font-semibold">${section.sectionTitle}</h2>
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-teal-400 to-transparent"></div>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl overflow-hidden shadow-xl shadow-blue-500/10">
+                        ${section.chapters.map(chapter => renderNode(chapter, 0)).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML += sectionHtml;
+        });
+
+        // 6. Inicializa Ícones
+        lucide.createIcons();
+
+        // 7. Funções Globais de Interatividade
+        
+        // Toggle Accordion
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.icon-chevron');
+            content.classList.toggle('open');
+            if(icon) icon.classList.toggle('rotate-180');
+        }
+
+        // Switch Tabs
+        function switchTab(btn, tabId) {
+            const container = btn.closest('.tabs-container');
+            
+            // Atualiza botões
+            const nav = container.querySelector('nav');
+            Array.from(nav.children).forEach(child => {
+                child.classList.remove('border-blue-600', 'text-blue-700');
+                child.classList.add('border-transparent', 'text-gray-500');
+            });
+            btn.classList.remove('border-transparent', 'text-gray-500');
+            btn.classList.add('border-blue-600', 'text-blue-700');
+
+            // Atualiza conteúdo
+            const contentArea = container.querySelector('.tabs-content-area');
+            Array.from(contentArea.children).forEach(child => {
+                if (child.dataset.tab === tabId) {
+                    child.classList.remove('hidden');
+                } else {
+                    child.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

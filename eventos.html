@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Projeto Conexão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .accordion-content { transition: max-height 0.3s ease-in-out; max-height: 0; overflow: hidden; }
+        .accordion-content.open { max-height: 1000px; } /* Altura máxima para animação */
+        .rotate-180 { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg shadow-blue-500/5 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/logo.png" alt="Logo" class="w-8 h-8 object-contain">
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">Início</a>
+                    <a href="conteudo.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">Conteúdo</a>
+                    <a href="eventos.html" class="px-3 py-2 rounded-md text-blue-600 bg-blue-50">Eventos</a>
+                    <a href="registros.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">Registros</a>
+                    <a href="contato.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contato</a>
+                </nav>
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden p-2 text-gray-700">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden py-4 border-t border-gray-200">
+                <nav class="flex flex-col space-y-2">
+                    <a href="index.html" class="px-3 py-2 text-gray-700">Início</a>
+                    <a href="conteudo.html" class="px-3 py-2 text-gray-700">Conteúdo</a>
+                    <a href="eventos.html" class="px-3 py-2 text-blue-600 bg-blue-50">Eventos</a>
+                    <a href="registros.html" class="px-3 py-2 text-gray-700">Registros</a>
+                    <a href="contato.html" class="px-3 py-2 text-gray-700">Contato</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 min-h-screen relative overflow-hidden">
+        
+        <div class="absolute top-20 left-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-20 right-0 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 mb-4 shadow-lg shadow-blue-500/30">
+                    <i data-lucide="calendar" class="text-white w-8 h-8"></i>
+                </div>
+                <h1 class="text-4xl text-blue-900 mb-2 font-bold">Eventos</h1>
+                <p class="text-gray-600">Aulões, workshops e atividades abertas à comunidade</p>
+            </div>
+
+            <div class="space-y-4">
+
+                <div class="bg-gradient-to-br from-white to-blue-50/30 border border-blue-200/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
+                    <button onclick="toggleEvent(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-blue-50/50 transition-colors">
+                        <div class="flex-1">
+                            <h3 class="text-lg text-blue-900 font-bold mb-2">Reta Final UERJ - Aulão de Química</h3>
+                            <p class="text-gray-600">Aulão de revisão para o Exame Discursivo de Química da UERJ.</p>
+                            <div class="flex flex-wrap gap-4 mt-3 text-sm">
+                                <div class="flex items-center gap-2 text-blue-600"><i data-lucide="calendar" class="w-4 h-4"></i> 19/11/2025</div>
+                                <div class="flex items-center gap-2 text-teal-600"><i data-lucide="clock" class="w-4 h-4"></i> 7:00 - 12:30</div>
+                                <div class="flex items-center gap-2 text-teal-600"><i data-lucide="map-pin" class="w-4 h-4"></i> Sala 415B - IQ UERJ</div>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-gray-400 transition-transform icon-chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 border-t border-blue-200/30 flex justify-center gap-4 flex-wrap">
+                            <a href="https://www.notion.so/lqtsm/Roteiro-Pr-tico-Atividade-sobre-Termoqu-mica-2af8e483182a804aa5a3dc16e244ed31" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-lg">
+                                <i data-lucide="laptop" class="w-5 h-5"></i> Roteiro Computacional
+                            </a>
+                            <a href="https://lqtsm.notion.site/Lista-Revis-o-UERJ-Discursiva-2ac8e483182a801ea088d1d11ef85c23" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition shadow-lg">
+                                <i data-lucide="file-text" class="w-5 h-5"></i> Lista de Questões
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-white to-blue-50/30 border border-blue-200/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
+                    <button onclick="toggleEvent(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-blue-50/50 transition-colors">
+                        <div class="flex-1">
+                            <h3 class="text-lg text-blue-900 font-bold mb-2">Aulão ENEM - Preparação Gratuita</h3>
+                            <p class="text-gray-600">Evento especial aberto à comunidade externa. Apenas 50 vagas.</p>
+                            <div class="flex flex-wrap gap-4 mt-3 text-sm">
+                                <div class="flex items-center gap-2 text-blue-600"><i data-lucide="calendar" class="w-4 h-4"></i> 11/11/2025</div>
+                                <div class="flex items-center gap-2 text-teal-600"><i data-lucide="clock" class="w-4 h-4"></i> 8:00 - 13:00</div>
+                                <div class="flex items-center gap-2 text-teal-600"><i data-lucide="map-pin" class="w-4 h-4"></i> UERJ - Campus Maracanã</div>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-gray-400 transition-transform icon-chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 border-t border-blue-200/30">
+                            <div class="text-center">
+                                <a href="https://lqtsm.notion.site/ebd/2998e483182a801a8ea4e4fd0b3042ab" target="_blank" class="text-blue-600 underline hover:text-blue-800">
+                                    Ver detalhes completos no Notion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleEvent(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.icon-chevron');
+            
+            // Abre/Fecha
+            content.classList.toggle('open');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>

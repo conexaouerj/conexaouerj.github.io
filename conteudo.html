@@ -49,14 +49,11 @@
     </header>
 
     <main class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 min-h-screen relative overflow-hidden">
-        
-        <!-- Decorative backgrounds -->
         <div class="absolute top-20 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -z-10"></div>
         <div class="absolute bottom-20 left-0 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl -z-10"></div>
         <div class="absolute top-1/3 left-1/3 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl -z-10"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            
             <div class="text-center mb-12">
                 <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 mb-4 shadow-lg shadow-blue-500/30">
                     <i data-lucide="book-open" class="text-white w-8 h-8"></i>
@@ -66,22 +63,20 @@
             </div>
 
             <div id="content-container" class="space-y-12"></div>
-
         </div>
     </main>
 
     <script>
-        // 1. Menu Mobile Logic
+        // --- LÓGICA DO MENU MOBILE ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
         });
 
-        // 2. Helper para criar estrutura vazia
+        // --- DADOS DO CONTEÚDO ---
         const createContent = () => ({ teoria: [], experimentos: [], exercicios: [] });
 
-        // 3. Dados Completos
         const theoreticalContent = [
             {
                 sectionTitle: "QUÍMICA GERAL E INORGÂNICA",
@@ -89,14 +84,13 @@
                     { 
                     title: "Aspectos Macroscópicos da Matéria", 
                     children: [ 
-                        { title: "Matéria e Energia", content: { teoria: [ { title: "Conceitos introdutórios", type: 'youtube', videoId: 'yAsU88OllAU' } ], experimentos: [], exercicios: [] } },
-                        { title: "Grandezas", content: { teoria: [ { title: "Grandezas", type: 'youtube', videoId: 'adNOSEUOvZ0' } ], experimentos: [], exercicios: [] } },
-                        { title: "Estados de Agregação", content: { teoria: [ { title: "Estados de Agregação", type: 'youtube', videoId: '8SOMdxX8CYk' } ], experimentos: [{ title: "Ponto de Congelamento do Ciclohexano", type: 'youtube', videoId: '8xft52ub-fM' }], exercicios: [] } },
-                        { title: "Classificação de Sistemas", content: createContent() },
-                        { title: "Aquecimento e resfriamento de substâncias", content: createContent() },
-                        { title: "Aquecimento e resfriamento de misturas", content: createContent() },
-                        { title: "Métodos de separação de sistemas homogêneos", content: createContent() },
-                        { title: "Métodos de separação de sistemas heterogêneos", content: createContent() },
+                        { title: "Matéria e Energia", content: { teoria: [ { title: "Conceitos introdutórios", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=yAsU88OllAU&t=1s' } ], experimentos: [], exercicios: [] } },
+                        { title: "Grandezas", content: { teoria: [ { title: "Grandezas", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=adNOSEUOvZ0&t=177s' } ], experimentos: [], exercicios: [] } },
+                        { title: "Estados de Agregação", content: { teoria: [ { title: "Estados de Agregação", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8SOMdxX8CYk&t=2280s' } ], experimentos: [{ title: "Ponto de Congelamento do Ciclohexano", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8xft52ub-fM' }], exercicios: [] } },
+                        { title: "Classificação de Sistemas", content: { teoria: [ { title: "Classificação de Sistemas", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8d37qyAstyw&t=398s' } ], experimentos: [], exercicios: [] } },
+                        { title: "Análise Térmica", content: { teoria: [ { title: "Análise Térmica", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=aBffCzBrzEM&t=793s' } ], experimentos: [], exercicios: [] } },
+                        { title: "Métodos de Separação de Sistemas Heterogêneos", content: createContent() },
+                        { title: "Métodos de Separação de Sistemas Homogêneos", content: createContent() },
                     ],
                     },
                     { 
@@ -265,11 +259,53 @@
             },
         ];
 
-        // 4. Funções de Renderização
-        const container = document.getElementById('content-container');
+        // --- SISTEMA DE RENDERIZAÇÃO E YOUTUBE API ---
 
-        // Renderiza um item do YouTube
+        // Armazena a lista de vídeos para inicializar depois
+        window.pendingYoutubePlayers = [];
+
+        function extractVideoDetails(url) {
+            let videoId = '';
+            let startTime = 0;
+
+            const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+
+            if (match && match[2].length === 11) {
+                videoId = match[2];
+            } else if (url.length === 11) {
+                videoId = url;
+            }
+
+            // Extrair tempo (t=120s)
+            if (url.includes('t=')) {
+                let timeMatch = url.match(/[?&]t=([0-9]+)s?/);
+                if (timeMatch && timeMatch[1]) {
+                    startTime = parseInt(timeMatch[1]);
+                }
+            }
+
+            return { videoId, startTime };
+        }
+
+        // Renderiza um PLACEHOLDER para o vídeo (não o iframe direto)
         function renderYoutubeItem(item) {
+            const details = extractVideoDetails(item.videoUrl || '');
+            
+            if (!details.videoId) {
+                return `<div class="p-4 text-red-500">Erro: Vídeo inválido</div>`;
+            }
+
+            // Cria um ID único para este player
+            const uniqueId = 'player_' + details.videoId + '_' + Math.floor(Math.random() * 10000);
+
+            // Adiciona à fila para inicialização
+            window.pendingYoutubePlayers.push({
+                elementId: uniqueId,
+                videoId: details.videoId,
+                start: details.startTime
+            });
+
             return `
             <div class="bg-gradient-to-br from-white to-blue-50/30 rounded-xl border border-blue-200/50 overflow-hidden hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all mb-3">
                 <button onclick="toggleAccordion(this)" class="w-full flex items-center justify-between p-4 text-left transition-colors hover:bg-gray-50">
@@ -284,7 +320,7 @@
                 <div class="accordion-content bg-gray-50 border-t border-gray-200">
                     <div class="p-4">
                         <div class="aspect-video rounded-lg overflow-hidden shadow-md relative bg-black">
-                             <iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/${item.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                             <div id="${uniqueId}" class="w-full h-full"></div>
                         </div>
                     </div>
                 </div>
@@ -292,7 +328,6 @@
             `;
         }
 
-        // Renderiza um item de Artigo
         function renderArtigoItem(item) {
             return `
             <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 bg-gradient-to-br from-white to-teal-50/30 rounded-xl border border-teal-200/50 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/10 transition-all group mb-3">
@@ -304,7 +339,6 @@
             `;
         }
 
-        // Renderiza as Abas (Teoria, Experimentos, Exercícios)
         function renderTabs(content) {
             const tabs = [
                 { id: 'teoria', label: 'Teoria', data: content.teoria },
@@ -315,29 +349,21 @@
             const hasContent = tabs.some(t => t.data && t.data.length > 0);
 
             if (!hasContent) {
-                return `
-                <div class="text-center py-8">
-                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                        <i data-lucide="book-open" class="w-6 h-6 text-gray-400"></i>
-                    </div>
-                    <p class="text-gray-500 text-sm">Nenhum conteúdo disponível nesta seção ainda.</p>
-                </div>`;
+                return `<div class="text-center py-8"><div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3"><i data-lucide="book-open" class="w-6 h-6 text-gray-400"></i></div><p class="text-gray-500 text-sm">Nenhum conteúdo disponível nesta seção ainda.</p></div>`;
             }
 
             let tabsNavHtml = '';
             let tabsContentHtml = '';
 
             tabs.forEach((tab, idx) => {
-                const isActive = idx === 0; // Primeira aba ativa por padrão
+                const isActive = idx === 0;
                 
-                // Botão da aba
                 tabsNavHtml += `
                     <button onclick="switchTab(this, '${tab.id}')" class="pb-3 px-1 border-b-2 transition-all ${isActive ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}">
                         ${tab.label}
                     </button>
                 `;
 
-                // Conteúdo da aba
                 let itemsHtml = '';
                 if (tab.data.length > 0) {
                     itemsHtml = tab.data.map(item => {
@@ -358,39 +384,21 @@
 
             return `
                 <div class="tabs-container mt-4">
-                    <div class="border-b-2 border-gray-100 mb-4">
-                        <nav class="flex gap-6" aria-label="Tabs">
-                            ${tabsNavHtml}
-                        </nav>
-                    </div>
-                    <div class="tabs-content-area">
-                        ${tabsContentHtml}
-                    </div>
+                    <div class="border-b-2 border-gray-100 mb-4"><nav class="flex gap-6">${tabsNavHtml}</nav></div>
+                    <div class="tabs-content-area">${tabsContentHtml}</div>
                 </div>
             `;
         }
 
-        // Renderiza um Nó Recursivo (Capítulo ou Subcapítulo)
         function renderNode(node, level) {
             const isLeaf = !!node.content;
             const paddingLeft = 16 + (level * 24);
             const isTopLevel = level === 0;
+            let innerContent = isLeaf ? `<div class="px-4 pb-6">${renderTabs(node.content)}</div>` : node.children.map(child => renderNode(child, level + 1)).join('');
 
-            // Conteúdo interno (Filhos ou Abas)
-            let innerContent = '';
-            if (isLeaf) {
-                innerContent = `<div class="px-4 pb-6">${renderTabs(node.content)}</div>`;
-            } else if (node.children) {
-                innerContent = node.children.map(child => renderNode(child, level + 1)).join('');
-            }
-
-            // Estilos condicionais
             const bgClass = isTopLevel ? 'bg-gray-50 hover:bg-gray-100' : 'bg-white hover:bg-gray-50';
             const textClass = isTopLevel ? 'text-gray-800 font-medium' : 'text-gray-700';
-            const iconHtml = !isTopLevel ? `
-                <div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center flex-shrink-0 mr-3">
-                    <i data-lucide="book-open" class="w-4 h-4 text-gray-600"></i>
-                </div>` : '';
+            const iconHtml = !isTopLevel ? `<div class="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center flex-shrink-0 mr-3"><i data-lucide="book-open" class="w-4 h-4 text-gray-600"></i></div>` : '';
 
             return `
             <div class="border-b border-gray-200 last:border-0">
@@ -399,15 +407,14 @@
                     <span class="flex-grow ${textClass}">${node.title}</span>
                     <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transition-transform duration-300 icon-chevron flex-shrink-0"></i>
                 </button>
-                <div class="accordion-content ${isTopLevel ? 'bg-white' : 'bg-gray-50/50'}">
-                    ${innerContent}
-                </div>
+                <div class="accordion-content ${isTopLevel ? 'bg-white' : 'bg-gray-50/50'}">${innerContent}</div>
             </div>
             `;
         }
 
-        // 5. Loop Principal de Renderização
-        theoreticalContent.forEach((section, idx) => {
+        // Renderiza tudo na tela
+        const container = document.getElementById('content-container');
+        theoreticalContent.forEach((section) => {
             const sectionHtml = `
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
@@ -423,12 +430,8 @@
             container.innerHTML += sectionHtml;
         });
 
-        // 6. Inicializa Ícones
         lucide.createIcons();
 
-        // 7. Funções Globais de Interatividade
-        
-        // Toggle Accordion
         function toggleAccordion(btn) {
             const content = btn.nextElementSibling;
             const icon = btn.querySelector('.icon-chevron');
@@ -436,11 +439,8 @@
             if(icon) icon.classList.toggle('rotate-180');
         }
 
-        // Switch Tabs
         function switchTab(btn, tabId) {
             const container = btn.closest('.tabs-container');
-            
-            // Atualiza botões
             const nav = container.querySelector('nav');
             Array.from(nav.children).forEach(child => {
                 child.classList.remove('border-blue-600', 'text-blue-700');
@@ -448,16 +448,42 @@
             });
             btn.classList.remove('border-transparent', 'text-gray-500');
             btn.classList.add('border-blue-600', 'text-blue-700');
-
-            // Atualiza conteúdo
             const contentArea = container.querySelector('.tabs-content-area');
             Array.from(contentArea.children).forEach(child => {
-                if (child.dataset.tab === tabId) {
-                    child.classList.remove('hidden');
-                } else {
-                    child.classList.add('hidden');
-                }
+                child.dataset.tab === tabId ? child.classList.remove('hidden') : child.classList.add('hidden');
             });
+        }
+
+        // --- INJETANDO A API DO YOUTUBE (Solução do Erro 153) ---
+        
+        // 1. Carrega o script da API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 2. Função chamada automaticamente pela API quando estiver pronta
+        function onYouTubeIframeAPIReady() {
+            console.log("YouTube API Ready. Inicializando players...");
+            
+            if (window.pendingYoutubePlayers) {
+                window.pendingYoutubePlayers.forEach(function(videoData) {
+                    new YT.Player(videoData.elementId, {
+                        height: '100%',
+                        width: '100%',
+                        videoId: videoData.videoId,
+                        playerVars: {
+                            'playsinline': 1,
+                            'start': videoData.start,
+                            'rel': 0 // Não mostrar vídeos relacionados ao pausar
+                        },
+                        events: {
+                            // Você pode adicionar eventos aqui se quiser
+                            // 'onReady': onPlayerReady,
+                        }
+                    });
+                });
+            }
         }
     </script>
 </body>

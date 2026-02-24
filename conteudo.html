@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,59 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        .accordion-content { transition: max-height 0.5s ease-in-out; max-height: 0; overflow: hidden; }
-        .accordion-content.open { max-height: 4000px; }
-        .rotate-180 { transform: rotate(180deg); }
-        #mobile-menu { display: none; }
-        #mobile-menu.open { display: block; }
+        .accordion-content {
+            transition: max-height 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.open {
+            max-height: 4000px;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.open {
+            display: block;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 min-h-screen font-sans">
 
-    <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg shadow-blue-500/5 z-50">
+    <header
+        class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-white/20 shadow-lg shadow-blue-500/5 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="flex items-center">
                     <img src="assets/logo.png" alt="Logo Projeto Conexão" class="w-8 h-8 object-contain">
                 </a>
-                
+
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Início</a>
-                    <a href="conteudo.html" class="px-3 py-2 rounded-md text-blue-600 bg-blue-50 transition-colors">Conteúdo</a>
-                    <a href="eventos.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Eventos</a>
-                    <a href="registros.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Registros</a>
-                    <a href="contato.html" class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Contato</a>
+                    <a href="index.html"
+                        class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Início</a>
+                    <a href="conteudo.html"
+                        class="px-3 py-2 rounded-md text-blue-600 bg-blue-50 transition-colors">Conteúdo</a>
+                    <a href="eventos.html"
+                        class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Eventos</a>
+                    <a href="registros.html"
+                        class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Registros</a>
+                    <a href="contato.html"
+                        class="px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors">Contato</a>
                 </nav>
 
-                <button id="menu-btn" class="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                <button id="menu-btn"
+                    class="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50">
                     <i data-lucide="menu"></i>
                 </button>
             </div>
-            
+
             <div id="mobile-menu" class="md:hidden py-4 border-t border-gray-200">
                 <nav class="flex flex-col space-y-2">
                     <a href="index.html" class="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">Início</a>
@@ -48,14 +73,16 @@
         </div>
     </header>
 
-    <main class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 min-h-screen relative overflow-hidden">
+    <main
+        class="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 min-h-screen relative overflow-hidden">
         <div class="absolute top-20 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl -z-10"></div>
         <div class="absolute bottom-20 left-0 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl -z-10"></div>
         <div class="absolute top-1/3 left-1/3 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl -z-10"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 mb-4 shadow-lg shadow-blue-500/30">
+                <div
+                    class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 mb-4 shadow-lg shadow-blue-500/30">
                     <i data-lucide="book-open" class="text-white w-8 h-8"></i>
                 </div>
                 <h1 class="text-4xl text-blue-900 font-bold mb-2">Conteúdo Didático</h1>
@@ -81,177 +108,176 @@
             {
                 sectionTitle: "QUÍMICA GERAL E INORGÂNICA",
                 chapters: [
-                    { 
-                    title: "Aspectos Macroscópicos da Matéria", 
-                    children: [ 
-                        {title: "Matéria e Energia",content: {teoria: [{title: "Conceitos introdutórios", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=yAsU88OllAU' }],experimentos: [],exercicios: [{title: "Lista de Exercícios - Conceitos Introdutórios", type: 'artigo',url: 'https://projetoconexaouerj.notion.site/Lista-de-Exerc-cios-Conceitos-Introdut-rios-3048e483182a8070be20ca05bb969c08?pvs=73'}]}},
-                        { title: "Grandezas", content: { teoria: [ { title: "Grandezas", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=adNOSEUOvZ0&t=177s' } ], experimentos: [], exercicios: [] } },
-                        { title: "Estados de Agregação", content: { teoria: [ { title: "Estados de Agregação", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8SOMdxX8CYk&t=2280s' } ], experimentos: [{ title: "Ponto de Congelamento do Ciclohexano", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8xft52ub-fM' }], exercicios: [] } },
-                        { title: "Classificação de Sistemas", content: { teoria: [ { title: "Classificação de Sistemas", type: 'youtube', videoUrl: 'https://youtu.be/8d37qyAstyw?si=hJYMYc0wcxGOK5iR' } ], experimentos: [], exercicios: [] } },
-                        { title: "Análise Térmica", content: { teoria: [ { title: "Análise Térmica", type: 'youtube', videoUrl: 'https://youtu.be/aBffCzBrzEM?si=oQ3cZtzOIytk3zFz' } ], experimentos: [], exercicios: [] } },
-                        { title: "Métodos de Separação de Sistemas Heterogêneos", content: createContent() },
-                        { title: "Métodos de Separação de Sistemas Homogêneos", content: createContent() },
-                    ],
-                    },
-                    { 
-                    title: "Atomística", 
-                    children: [
-                        { title: "A hipótese atômica e o modelo de Dalton", content: createContent() },
-                        { title: "O modelo de Thomson e a descoberta do elétron", content: createContent() },
-                        { title: "O modelo de Rutherford", content: createContent() },
-                        { title: "O modelo de Bohr", content: createContent() },
-                        { title: "O modelo de Sommerfeld", content: createContent() },
-                        { title: "Constituição dos átomos e íons", content: createContent() },
-                        { title: "Semelhanças atômicas", content: createContent() },
-                        { title: "Configuração eletrônica em níveis e subníveis", content: createContent() },
-                        { title: "Configurações eletrônicas especiais", content: createContent() },
-                    ],
-                    },
-                    { 
-                    title: "Os elementos químicos", 
-                    children: [
-                        { title: "A evolução das classificações periódicas", content: createContent() },
-                        { title: "Períodos e grupos", content: createContent() },
-                        { title: "Blocos da tabela periódica", content: createContent() },
-                        { title: "Classificação quanto à condutividade elétrica", content: createContent() },
-                        { title: "Propriedades periódicas: raio atômico", content: createContent() },
-                        { title: "Propriedades periódicas: energia de ionização", content: createContent() },
-                        { title: "Propriedades periódicas: afinidade eletrônica", content: createContent() },
-                        { title: "Propriedades periódicas: eletronegatividade", content: createContent() },
-                        { title: "Propriedades periódicas: eletropositividade", content: createContent() },
-                        { title: "Propriedades periódicas: outras", content: createContent() },
-                    ],
-                    },
-                    { 
-                    title: "Ligação química", 
-                    children: [
-                        { title: "A regra do octeto", content: createContent() },
-                        { title: "Ligação iônica", content: createContent() },
-                        { title: "Ligação covalente", content: createContent() },
-                        { title: "Montagem de fórmulas estruturais simples", content: createContent() },
-                        { title: "Ligação metálica", content: createContent() },
-                        { title: "Condutividade elétrica de diferentes sistemas", content: createContent() },
-                        { title: "Ligação Covalente Coordenada x Expansão do Octeto", content: createContent() },
-                    ]
-                    },
-                    { 
-                    title: "Geometria, polaridade e interações", 
-                    children: [
-                        { title: "Teoria da Repulsão dos Pares Eletrônicos da Camada de Valência", content: createContent() },
-                        { title: "Geometrias possíveis para os pares eletrônicos", content: createContent() },
-                        { title: "Geometrias de moléculas", content: createContent() },
-                        { title: "Polaridade de ligações químicas", content: createContent() },
-                        { title: "Polaridade de moléculas", content: createContent() },
-                        { title: "Forças intermoleculares", content: createContent() },
-                        { title: "Conexão com as mudanças de estado de agregação", content: createContent() },
-                        { title: "Conexão com a solubilidade", content: createContent() },
-                    ]
-                    },
-                    { 
-                    title: "Oxirredução", 
-                    children: [
-                        { title: "Número de oxidação", content: createContent() },
-                        { title: "Elementos com Nox fixo", content: createContent() },
-                        { title: "Determinação de Nox", content: createContent() },
-                        { title: "Oxidação e redução", content: createContent() },
-                        { title: "Agentes oxidantes e redutores", content: createContent() },
-                    ],
-                    },
-                    { 
-                    title: "Funções Inorgânicas", 
-                    children: [
-                        { 
-                        title: "Ácidos", 
+                    {
+                        title: "Aspectos Macroscópicos da Matéria",
                         children: [
-                            { title: "Condutividade de compostos iônicos (dissociação)", content: createContent() },
-                            { title: "Ácidos de Arrhenius e equações de ionização", content: createContent() },
-                            { title: "Classificação de ácidos", content: createContent() },
-                            { title: "Nomenclatura de ácidos", content: createContent() },
-                            { title: "Formulação de ácidos", content: createContent() },
-                            { title: "Força x poder de corrosão", content: createContent() },
-                            { title: "Propriedades e aplicações", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Bases", 
-                        children: [
-                            { title: "Bases de Arrhenius e equações de dissociação", content: createContent() },
-                            { title: "Classificação das bases", content: createContent() },
-                            { title: "O hidróxido de amônio", content: createContent() },
-                            { title: "Nomenclatura de bases", content: createContent() },
-                            { title: "Propriedades e aplicações", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Indicadores ácido-base e pH", 
-                        children: [
-                            { title: "Escala de pH e ação de indicadores", content: createContent() },
-                            { title: "Indicadores comerciais", content: createContent() },
-                            { title: "Indicadores naturais", content: createContent() },
-                            { title: "Reações de neutralização total e parcial", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Sais", 
-                        children: [
-                            { title: "Conceito de sal", content: createContent() },
-                            { title: "Classificação de sais", content: createContent() },
-                            { title: "Nomenclatura de sais", content: createContent() },
-                            { title: "Formulação de sais", content: createContent() },
-                            { title: "Propriedades e aplicações", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Óxidos", 
-                        children: [
-                            { title: "Conceito de óxido", content: createContent() },
-                            { title: "Classificação de óxidos", content: createContent() },
-                            { title: "Nomenclatura de óxidos", content: createContent() },
-                            { title: "Formulação de óxidos", content: createContent() },
-                            { title: "Propriedades e aplicações", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Peróxidos e superóxidos", 
-                        children: [
-                            { title: "Conceitos de peróxidos e superóxidos", content: createContent() },
-                            { title: "Nomenclatura de peróxidos e superóxidos", content: createContent() },
-                            { title: "Formulação de peróxidos e superóxidos", content: createContent() },
-                            { title: "Propriedades e aplicações", content: createContent() },
-                        ]
-                        },
-                        { 
-                        title: "Hidretos", 
-                        children: [
-                            { title: "Conceito de hidreto", content: createContent() },
-                            { title: "Classificação de hidretos", content: createContent() },
-                            { title: "Nomenclatura de hidretos", content:createContent() },
-                            { title: "Formulação de hidretos", content: createContent() },
-                        ]
-                        },
-                    ],
+                            { title: "Matéria e Energia", content: { teoria: [{ title: "Conceitos introdutórios", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=yAsU88OllAU' }], experimentos: [], exercicios: [{ title: "Lista de Exercícios - Conceitos Introdutórios", type: 'artigo', url: 'https://projetoconexaouerj.notion.site/Lista-de-Exerc-cios-Conceitos-Introdut-rios-3048e483182a8070be20ca05bb969c08?pvs=73' }] } },
+                            { title: "Grandezas", content: { teoria: [{ title: "Grandezas", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=adNOSEUOvZ0&t=177s' }], experimentos: [], exercicios: [] } },
+                            { title: "Estados de Agregação", content: { teoria: [{ title: "Estados de Agregação", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8SOMdxX8CYk&t=2280s' }], experimentos: [{ title: "Ponto de Congelamento do Ciclohexano", type: 'youtube', videoUrl: 'https://www.youtube.com/watch?v=8xft52ub-fM' }], exercicios: [] } },
+                            { title: "Classificação de Sistemas", content: { teoria: [{ title: "Classificação de Sistemas", type: 'youtube', videoUrl: 'https://youtu.be/8d37qyAstyw?si=hJYMYc0wcxGOK5iR' }], experimentos: [], exercicios: [] } },
+                            { title: "Análise Térmica", content: { teoria: [{ title: "Análise Térmica", type: 'youtube', videoUrl: 'https://youtu.be/aBffCzBrzEM?si=oQ3cZtzOIytk3zFz' }], experimentos: [], exercicios: [] } },
+                            { title: "Métodos de Separação", content: { teoria: [{ title: "Métodos de Separação", type: 'youtube', videoUrl: 'https://youtu.be/YJgeAuTpplo' }], experimentos: [], exercicios: [] } },
+                        ],
                     },
-                    { 
-                    title: "Reações Inorgânicas", 
-                    children: [
-                        { title: "Representação de uma reação", content: createContent() },
-                        { title: "Reações de adição ou síntese", content: createContent() },
-                        { title: "Reações de decomposição ou análise", content: createContent() },
-                        { title: "Reações de simples troca, deslocamento ou substituição", content: createContent() },
-                        { title: "Reações de dupla troca ou permutação", content: createContent() },
-                    ]
+                    {
+                        title: "Atomística",
+                        children: [
+                            { title: "A hipótese atômica e o modelo de Dalton", content: createContent() },
+                            { title: "O modelo de Thomson e a descoberta do elétron", content: createContent() },
+                            { title: "O modelo de Rutherford", content: createContent() },
+                            { title: "O modelo de Bohr", content: createContent() },
+                            { title: "O modelo de Sommerfeld", content: createContent() },
+                            { title: "Constituição dos átomos e íons", content: createContent() },
+                            { title: "Semelhanças atômicas", content: createContent() },
+                            { title: "Configuração eletrônica em níveis e subníveis", content: createContent() },
+                            { title: "Configurações eletrônicas especiais", content: createContent() },
+                        ],
+                    },
+                    {
+                        title: "Os elementos químicos",
+                        children: [
+                            { title: "A evolução das classificações periódicas", content: createContent() },
+                            { title: "Períodos e grupos", content: createContent() },
+                            { title: "Blocos da tabela periódica", content: createContent() },
+                            { title: "Classificação quanto à condutividade elétrica", content: createContent() },
+                            { title: "Propriedades periódicas: raio atômico", content: createContent() },
+                            { title: "Propriedades periódicas: energia de ionização", content: createContent() },
+                            { title: "Propriedades periódicas: afinidade eletrônica", content: createContent() },
+                            { title: "Propriedades periódicas: eletronegatividade", content: createContent() },
+                            { title: "Propriedades periódicas: eletropositividade", content: createContent() },
+                            { title: "Propriedades periódicas: outras", content: createContent() },
+                        ],
+                    },
+                    {
+                        title: "Ligação química",
+                        children: [
+                            { title: "A regra do octeto", content: createContent() },
+                            { title: "Ligação iônica", content: createContent() },
+                            { title: "Ligação covalente", content: createContent() },
+                            { title: "Montagem de fórmulas estruturais simples", content: createContent() },
+                            { title: "Ligação metálica", content: createContent() },
+                            { title: "Condutividade elétrica de diferentes sistemas", content: createContent() },
+                            { title: "Ligação Covalente Coordenada x Expansão do Octeto", content: createContent() },
+                        ]
+                    },
+                    {
+                        title: "Geometria, polaridade e interações",
+                        children: [
+                            { title: "Teoria da Repulsão dos Pares Eletrônicos da Camada de Valência", content: createContent() },
+                            { title: "Geometrias possíveis para os pares eletrônicos", content: createContent() },
+                            { title: "Geometrias de moléculas", content: createContent() },
+                            { title: "Polaridade de ligações químicas", content: createContent() },
+                            { title: "Polaridade de moléculas", content: createContent() },
+                            { title: "Forças intermoleculares", content: createContent() },
+                            { title: "Conexão com as mudanças de estado de agregação", content: createContent() },
+                            { title: "Conexão com a solubilidade", content: createContent() },
+                        ]
+                    },
+                    {
+                        title: "Oxirredução",
+                        children: [
+                            { title: "Número de oxidação", content: createContent() },
+                            { title: "Elementos com Nox fixo", content: createContent() },
+                            { title: "Determinação de Nox", content: createContent() },
+                            { title: "Oxidação e redução", content: createContent() },
+                            { title: "Agentes oxidantes e redutores", content: createContent() },
+                        ],
+                    },
+                    {
+                        title: "Funções Inorgânicas",
+                        children: [
+                            {
+                                title: "Ácidos",
+                                children: [
+                                    { title: "Condutividade de compostos iônicos (dissociação)", content: createContent() },
+                                    { title: "Ácidos de Arrhenius e equações de ionização", content: createContent() },
+                                    { title: "Classificação de ácidos", content: createContent() },
+                                    { title: "Nomenclatura de ácidos", content: createContent() },
+                                    { title: "Formulação de ácidos", content: createContent() },
+                                    { title: "Força x poder de corrosão", content: createContent() },
+                                    { title: "Propriedades e aplicações", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Bases",
+                                children: [
+                                    { title: "Bases de Arrhenius e equações de dissociação", content: createContent() },
+                                    { title: "Classificação das bases", content: createContent() },
+                                    { title: "O hidróxido de amônio", content: createContent() },
+                                    { title: "Nomenclatura de bases", content: createContent() },
+                                    { title: "Propriedades e aplicações", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Indicadores ácido-base e pH",
+                                children: [
+                                    { title: "Escala de pH e ação de indicadores", content: createContent() },
+                                    { title: "Indicadores comerciais", content: createContent() },
+                                    { title: "Indicadores naturais", content: createContent() },
+                                    { title: "Reações de neutralização total e parcial", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Sais",
+                                children: [
+                                    { title: "Conceito de sal", content: createContent() },
+                                    { title: "Classificação de sais", content: createContent() },
+                                    { title: "Nomenclatura de sais", content: createContent() },
+                                    { title: "Formulação de sais", content: createContent() },
+                                    { title: "Propriedades e aplicações", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Óxidos",
+                                children: [
+                                    { title: "Conceito de óxido", content: createContent() },
+                                    { title: "Classificação de óxidos", content: createContent() },
+                                    { title: "Nomenclatura de óxidos", content: createContent() },
+                                    { title: "Formulação de óxidos", content: createContent() },
+                                    { title: "Propriedades e aplicações", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Peróxidos e superóxidos",
+                                children: [
+                                    { title: "Conceitos de peróxidos e superóxidos", content: createContent() },
+                                    { title: "Nomenclatura de peróxidos e superóxidos", content: createContent() },
+                                    { title: "Formulação de peróxidos e superóxidos", content: createContent() },
+                                    { title: "Propriedades e aplicações", content: createContent() },
+                                ]
+                            },
+                            {
+                                title: "Hidretos",
+                                children: [
+                                    { title: "Conceito de hidreto", content: createContent() },
+                                    { title: "Classificação de hidretos", content: createContent() },
+                                    { title: "Nomenclatura de hidretos", content: createContent() },
+                                    { title: "Formulação de hidretos", content: createContent() },
+                                ]
+                            },
+                        ],
+                    },
+                    {
+                        title: "Reações Inorgânicas",
+                        children: [
+                            { title: "Representação de uma reação", content: createContent() },
+                            { title: "Reações de adição ou síntese", content: createContent() },
+                            { title: "Reações de decomposição ou análise", content: createContent() },
+                            { title: "Reações de simples troca, deslocamento ou substituição", content: createContent() },
+                            { title: "Reações de dupla troca ou permutação", content: createContent() },
+                        ]
                     },
                 ],
             },
-            { 
-                sectionTitle: "FÍSICO-QUÍMICA", 
+            {
+                sectionTitle: "FÍSICO-QUÍMICA",
                 chapters: [
                     { title: "Soluções", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
                     { title: "Termoquímica", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
                 ]
             },
-            { 
-                sectionTitle: "QUÍMICA ORGÂNICA", 
+            {
+                sectionTitle: "QUÍMICA ORGÂNICA",
                 chapters: [
                     { title: "Introdução à Química Orgânica", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
                     { title: "Funções Orgânicas", children: [{ title: "Tópico de Exemplo", content: createContent() }] },
@@ -291,7 +317,7 @@
         // Renderiza um PLACEHOLDER para o vídeo (não o iframe direto)
         function renderYoutubeItem(item) {
             const details = extractVideoDetails(item.videoUrl || '');
-            
+
             if (!details.videoId) {
                 return `<div class="p-4 text-red-500">Erro: Vídeo inválido</div>`;
             }
@@ -345,7 +371,7 @@
                 { id: 'experimentos', label: 'Experimentos', data: content.experimentos },
                 { id: 'exercicios', label: 'Exercícios', data: content.exercicios },
             ];
-            
+
             const hasContent = tabs.some(t => t.data && t.data.length > 0);
 
             if (!hasContent) {
@@ -357,7 +383,7 @@
 
             tabs.forEach((tab, idx) => {
                 const isActive = idx === 0;
-                
+
                 tabsNavHtml += `
                     <button onclick="switchTab(this, '${tab.id}')" class="pb-3 px-1 border-b-2 transition-all ${isActive ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}">
                         ${tab.label}
@@ -436,7 +462,7 @@
             const content = btn.nextElementSibling;
             const icon = btn.querySelector('.icon-chevron');
             content.classList.toggle('open');
-            if(icon) icon.classList.toggle('rotate-180');
+            if (icon) icon.classList.toggle('rotate-180');
         }
 
         function switchTab(btn, tabId) {
@@ -455,7 +481,7 @@
         }
 
         // --- INJETANDO A API DO YOUTUBE (Solução do Erro 153) ---
-        
+
         // 1. Carrega o script da API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -465,9 +491,9 @@
         // 2. Função chamada automaticamente pela API quando estiver pronta
         function onYouTubeIframeAPIReady() {
             console.log("YouTube API Ready. Inicializando players...");
-            
+
             if (window.pendingYoutubePlayers) {
-                window.pendingYoutubePlayers.forEach(function(videoData) {
+                window.pendingYoutubePlayers.forEach(function (videoData) {
                     new YT.Player(videoData.elementId, {
                         height: '100%',
                         width: '100%',
@@ -487,4 +513,5 @@
         }
     </script>
 </body>
+
 </html>
